@@ -1,5 +1,7 @@
 # AgentMindHub
 
+[English](./README.md) | [Deutsch](./README.de.md)
+
 A modular MCP server for multi-agent coordination.
 
 ## Status
