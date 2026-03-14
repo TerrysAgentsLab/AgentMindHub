@@ -16,6 +16,7 @@ Desktop.ini
 # IDE
 .vscode/
 .idea/
+.claude/
 
 # Memory data (user-specific)
 *.jsonl
