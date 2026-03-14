@@ -22,3 +22,6 @@ Desktop.ini
 
 # Logs
 *.log
+
+# Internal docs (local only)
+_docs/
