@@ -1,0 +1,38 @@
+{
+  "name": "agentmindhub",
+  "version": "0.1.0",
+  "description": "Modular MCP Server for Multi-Agent Coordination",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "agentmindhub": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TerrysAgentsLab/AgentMindHub.git"
+  },
+  "keywords": [
+    "mcp",
+    "memory",
+    "multi-agent",
+    "knowledge-graph"
+  ],
+  "author": "web&wow / TerrysAgentsLab",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TerrysAgentsLab/AgentMindHub/issues"
+  },
+  "homepage": "https://github.com/TerrysAgentsLab/AgentMindHub#readme",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "typescript": "^5.9.3"
+  }
+}
