@@ -17,11 +17,11 @@ const server = new McpServer({
 
 const loader = new ModuleLoader();
 
-// Memory-Modul laden
+// Load the memory module
 const memoryModule = createMemoryModule(memoryPath);
 loader.register(memoryModule);
 
-// Alle Module am Server registrieren
+// Register all modules on the server
 loader.registerAll(server);
 
 async function main(): Promise<void> {

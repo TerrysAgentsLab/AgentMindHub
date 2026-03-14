@@ -1,8 +1,8 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 
 /**
- * Interface für alle AgentMindHub-Module.
- * Jedes Modul registriert seine eigenen Tools am Server.
+ * Interface for all AgentMindHub modules.
+ * Each module registers its own tools on the server.
  */
 export interface AgentMindHubModule {
   name: string;

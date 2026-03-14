@@ -34,7 +34,7 @@ export class KnowledgeGraphManager {
       }
     } catch (err: unknown) {
       if ((err as NodeJS.ErrnoException).code === "ENOENT") {
-        // Memory-Datei existiert nicht – starten mit leerem Graph
+        // Memory file does not exist yet, start with an empty graph
         return;
       }
       throw err;
@@ -94,7 +94,7 @@ export class KnowledgeGraphManager {
     for (const name of names) {
       this.entities.delete(name);
     }
-    // Relations die auf gelöschte Entities zeigen auch entfernen
+    // Remove relations that point to deleted entities as well
     this.relations = this.relations.filter(
       (r) => !names.includes(r.from) && !names.includes(r.to)
     );

@@ -1,14 +1,14 @@
 # AgentMindHub – MVP Plan
 
 ## Context
-Modularer MCP Server für Multi-Agent-Koordination. MVP: Memory-Modul.
+A modular MCP server for multi-agent coordination. MVP: memory module.
 
 - **Repo:** P:/AgentMindHub
 - **GitHub:** https://github.com/TerrysAgentsLab/AgentMindHub
 - **NPM-Name:** agentmindhub
-- **Lizenz:** MIT
+- **License:** MIT
 
-## Projektstruktur
+## Project Structure
 ```
 AgentMindHub/
 ├── package.json
@@ -16,12 +16,12 @@ AgentMindHub/
 ├── README.md
 ├── LICENSE                → MIT
 ├── src/
-│   ├── index.ts           → Entry Point, lädt Module
-│   ├── module-loader.ts   → Interface für Module, Registry
+│   ├── index.ts           → Entry point, loads modules
+│   ├── module-loader.ts   → Module interface and registry
 │   ├── types.ts           → Shared Types
 │   └── modules/
 │       └── memory/
-│           ├── index.ts   → Memory-Modul (registriert sich selbst)
+│           ├── index.ts   → Memory module (self-registering)
 │           ├── manager.ts → KnowledgeGraphManager
 │           └── types.ts   → Entity, Relation, KnowledgeGraph
 ├── docker/
@@ -31,7 +31,7 @@ AgentMindHub/
         └── ci.yml
 ```
 
-## Modulare Architektur
+## Modular Architecture
 
 ### Module Interface
 ```typescript
@@ -43,21 +43,21 @@ interface AgentMindHubModule {
 ```
 
 ### Entry Point (src/index.ts)
-- Liest Config (welche Module aktiv)
-- Lädt aktivierte Module
-- Jedes Modul registriert seine eigenen Tools am Server
-- Server startet über stdio
+- Reads config to determine which modules are active
+- Loads the enabled modules
+- Each module registers its own tools on the server
+- Starts the server over stdio
 
-### Config über Env-Vars:
+### Configuration via Environment Variables
 
-| Variable | Pflicht? | Default | Beschreibung |
-|----------|----------|---------|--------------|
-| `AGENTMINDHUB_MEMORY_PATH` | Nein | `./memory.jsonl` | Pfad zur Memory-Datei |
-| `MEMORY_FILE_PATH` | Nein | – | Fallback (Kompatibilität zum Original) |
+| Variable | Required? | Default | Description |
+|----------|-----------|---------|-------------|
+| `AGENTMINDHUB_MEMORY_PATH` | No | `./memory.jsonl` | Path to the memory file |
+| `MEMORY_FILE_PATH` | No | – | Fallback for compatibility with the original |
 
-## Memory-Modul
+## Memory Module
 
-Basierend auf @modelcontextprotocol/server-memory (~300-400 Zeilen TypeScript):
+Based on `@modelcontextprotocol/server-memory` (~300-400 lines of TypeScript):
 
 ### 9 Tools:
 1. create_entities
@@ -70,19 +70,19 @@ Basierend auf @modelcontextprotocol/server-memory (~300-400 Zeilen TypeScript):
 8. search_nodes
 9. open_nodes
 
-### Datenmodell:
+### Data Model:
 ```typescript
 interface Entity { name: string; entityType: string; observations: string[] }
 interface Relation { from: string; to: string; relationType: string }
 interface KnowledgeGraph { entities: Entity[]; relations: Relation[] }
 ```
 
-### Storage: JSONL (kompatibel zum Original)
+### Storage: JSONL (compatible with the original)
 
-### Fehlerverhalten:
-- **Memory-Datei fehlt:** Neue leere Datei anlegen (kein Fehler)
-- **Korrupte JSONL-Zeile:** Überspringen + Warnung auf stderr (kein Crash)
-- **Alle Daten im RAM:** Graph wird beim Start komplett geladen, bei jeder Änderung komplett geschrieben (wie Original)
+### Error Handling:
+- **Missing memory file:** Create a new empty file (no error)
+- **Corrupt JSONL line:** Skip it and warn on stderr (no crash)
+- **All data in memory:** Load the full graph on startup and rewrite it fully on each change (same as the original)
 
 ## Dependencies
 ```
@@ -92,34 +92,34 @@ typescript (dev)
 @types/node (dev)
 ```
 
-## Implementierungsreihenfolge
+## Implementation Order
 1. `npm init` + Dependencies installieren
-2. tsconfig.json konfigurieren
-3. src/types.ts – Shared Types + Module Interface
-4. src/modules/memory/types.ts – Memory-spezifische Types
+2. Configure `tsconfig.json`
+3. `src/types.ts` – shared types and module interface
+4. `src/modules/memory/types.ts` – memory-specific types
 5. src/modules/memory/manager.ts – KnowledgeGraphManager
-6. src/modules/memory/index.ts – Tool-Registrierung
-7. src/module-loader.ts – Modul-Registry
-8. src/index.ts – Entry Point
-9. Build + Test
-10. README.md + LICENSE
+6. `src/modules/memory/index.ts` – tool registration
+7. `src/module-loader.ts` – module registry
+8. `src/index.ts` – entry point
+9. Build and test
+10. `README.md` and `LICENSE`
 
-## Verifizierung
-1. `npm run build` kompiliert fehlerfrei
-2. Server startet und listet Memory-Tools
-3. Claude Code: Entity erstellen, lesen, suchen, löschen
-4. Kilocode: Gleiche Memory-Datei lesen (Bridge-Test)
-5. `npx agentmindhub` startet korrekt
+## Verification
+1. `npm run build` compiles without errors
+2. The server starts and lists the memory tools
+3. Claude Code can create, read, search, and delete entities
+4. Kilocode can read the same memory file (bridge test)
+5. `npx agentmindhub` starts correctly
 
 ## Post-MVP
-- **Tests:** Unit-Tests für KnowledgeGraphManager, Integrationstest Server-Start
-- **Docker:** Dockerfile mit Volume-Mount für Memory-Datei
-- **CI/CD:** GitHub Actions Pipeline (Build + Test)
-- **Input-Validierung:** Entity-Namen, Observation-Länge
-- **Datenmodell-Migration:** Falls Format sich ändert
+- **Tests:** Unit tests for `KnowledgeGraphManager`, integration test for server startup
+- **Docker:** Dockerfile with a volume mount for the memory file
+- **CI/CD:** GitHub Actions pipeline for build and test
+- **Input validation:** Entity names and observation length
+- **Data model migration:** If the format changes later
 
-## Spätere Module (nicht MVP)
-- Tasks: Action Items, Zuweisungen, Status-Tracking
-- Mail: Stream-Protokoll als MCP-Tools
-- Filesystem: Kontrollierter Dateizugriff
-- Sequential Thinking: Strukturiertes Denken
+## Later Modules (Not Part of the MVP)
+- Tasks: action items, assignments, status tracking
+- Mail: stream protocol as MCP tools
+- Filesystem: controlled file access
+- Sequential Thinking: structured reasoning

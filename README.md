@@ -1,18 +1,18 @@
 # AgentMindHub
 
-Modularer MCP Server für Multi-Agent-Koordination.
+A modular MCP server for multi-agent coordination.
 
 ## Status
 
-MVP in Entwicklung – Memory-Modul.
+MVP in development: memory module.
 
-## Was ist das?
+## What Is It?
 
-Ein [Model Context Protocol](https://modelcontextprotocol.io/) Server, der AI-Agents (Claude Code, Kilocode, Codex) gemeinsamen Zugriff auf einen Knowledge Graph gibt. Modular aufgebaut, damit später weitere Module (Tasks, Mail, Filesystem) dazukommen können.
+An [Model Context Protocol](https://modelcontextprotocol.io/) server that gives AI agents (Claude Code, Kilocode, Codex) shared access to a knowledge graph. It is built in a modular way so additional modules such as tasks, mail, and filesystem access can be added later.
 
-## MVP: Memory-Modul
+## MVP: Memory Module
 
-Basierend auf `@modelcontextprotocol/server-memory` – kompatibles JSONL-Format, 9 Tools:
+Based on `@modelcontextprotocol/server-memory` with a compatible JSONL format and 9 tools:
 
 - `create_entities` / `delete_entities`
 - `create_relations` / `delete_relations`
@@ -25,7 +25,7 @@ Basierend auf `@modelcontextprotocol/server-memory` – kompatibles JSONL-Format
 npm install -g agentmindhub
 ```
 
-## Nutzung
+## Usage
 
 ### Claude Code (`~/.claude/settings.json`)
 
@@ -43,13 +43,13 @@ npm install -g agentmindhub
 }
 ```
 
-### Konfiguration
+### Configuration
 
-| Variable | Pflicht? | Default | Beschreibung |
-|----------|----------|---------|--------------|
-| `AGENTMINDHUB_MEMORY_PATH` | Nein | `./memory.jsonl` | Pfad zur Memory-Datei |
-| `MEMORY_FILE_PATH` | Nein | – | Fallback (Kompatibilität) |
+| Variable | Required? | Default | Description |
+|----------|-----------|---------|-------------|
+| `AGENTMINDHUB_MEMORY_PATH` | No | `./memory.jsonl` | Path to the memory file |
+| `MEMORY_FILE_PATH` | No | – | Compatibility fallback |
 
-## Lizenz
+## License
 
 MIT
